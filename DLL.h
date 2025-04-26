@@ -1,55 +1,49 @@
-#ifndef DLL_H
-#define DLL_H
+#ifndef SLL_H
+#define SLL_H
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "boolean.h"
-#define Nil NULL
-#define Info(P) (P)->info
-#define Next(P) (P)->next
-#define Prev(P) (P)->prev
 #define MAX_NAME_LENGTH 50
 
-typedef struct NameNode *addressName;
-typedef struct KotaNode *addressKota;
+typedef struct Warga *addressWg;
+typedef struct Kota *addressKt;
 
-// Definisi struct NameNode untuk data warga (double linked list)
-typedef struct NameNode {
-    char *name;
-    addressName next;  // Pointer next untuk warga
-    addressName prev;  // Pointer prev untuk warga (tambahan untuk double linked list)
-} NameNode;
+typedef struct Warga {
+    char *nama; 	  // Nama warga
+    addressWg next;  // Pointer ke node Warga berikutnya
+} Warga;
 
-// Definisi struct KotaNode terpisah
-typedef struct KotaNode {
+typedef struct Kota {
     char *Kota;        // Nama kota
-    addressName nama;  // Pointer ke daftar nama di kota ini
-} KotaNode;
+    addressWg warga;  // Pointer ke struct Warga di Kota
+} Kota;
 
-// Array untuk menyimpan daftar kota
+// Array untuk daftar kota
 typedef struct {
-    KotaNode *data;
+    Kota *data;
     int count;
     int capacity;
 } ArrayKota;
 
-// Modul untuk inisialisasi array
+// Modul untuk inisialisasi array kota
 void initArrayKota(ArrayKota *arr, int capacity);
 
-// Modul untuk operasi pada kota
+// Modul untuk input dan hapus kota
 void masukkanKota(ArrayKota *arr, const char *namaKota);
 void hapusKota(ArrayKota *arr, const char *namaKota);
 boolean cariKota(ArrayKota *arr, const char *namaKota);
 
-// Modul untuk operasi pada nama/warga
-void masukkanNama(KotaNode *kota, const char *nama);
-void hapusNama(KotaNode *kota, const char *nama);
+// Modul untuk input dan hapus nama warga
+void masukkanNama(Kota *kota, const char *warga);
+void hapusNama(Kota *kota, const char *warga);
 
-// Modul untuk menampilkan data
+// Modul untuk menampilkan
 void tampilanKota(ArrayKota arr);
-void tampilanNama(KotaNode *kota);
+void tampilanNama(Kota *kota);
 
-// Modul untuk menghapus semua data
-void hapusDataNama(KotaNode *kota);
+// Modul untuk menghapus
+void hapusDataNama(Kota *kota);
 void HapusDataKota(ArrayKota *arr);
+
 #endif
