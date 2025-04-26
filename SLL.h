@@ -22,8 +22,8 @@ typedef struct Kota {
 // Array untuk daftar kota
 typedef struct {
     Kota *data;
-    int count;
-    int capacity;
+    int jumlah;
+    int batas;
 } ArrayKota;
 
 // Modul untuk inisialisasi array kota
